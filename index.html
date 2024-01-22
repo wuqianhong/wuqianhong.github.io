@@ -1,49 +1,163 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title> Pkm导航 </title>
-    <style>  
-      body {
-        margin: 0;
-      }
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: url('https://tu.duoduocdn.com/uploads/day_221111/202211111949585784.jpg');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+
+        #header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            padding: 10px;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        #logo {
+            margin-right: 20px; /* 调整图片与文字之间的间距 */
+        }
+
+        #navigation {
+            float: left;
+            margin-left: 20px;
+        }
+
+        .expandable {
+            display: inline-block; /* 将菜单横向排列 */
+            margin-right: 10px; /* 调整菜单之间的间距 */
+            cursor: pointer;
+        }
+
+        #box {
+            width: 1200px;
+            height: 300px;
+            background: rgba(128, 128, 128, 0.5);
+            position: relative;
+            margin: auto; /* 水平居中 */
+            margin-top: 200px; /* 距离上方的间距 */
+        }
+
+        #box > div:last-child {
+            float: left;
+            width: 100%;
+            margin: 20px auto 0; /* 水平居中，顶部上移20px */
+        }
+
+        #box > div:last-child > div {
+            float: left;
+            width: 25%;
+            box-sizing: border-box;
+            padding: 10px;
+            background-color: rgba(240, 128, 128, 0.8);
+            text-align: center;
+        }
+
+        #content {
+            background-color: #f1f1f1;
+            text-align: center;
+            padding: 40px;
+            font-size: 12px;
+            opacity: 1;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #expanded-content {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            position: fixed;
+            top: 70px;  /* 初始top值，使内容在视图内可见 */
+            left: 250px;  /* 初始left值，使内容在视图内可见 */
+            width: calc(100% - 250px);
+            height: calc(100% - 70px);
+            overflow-y: auto;
+            z-index: 999;
+        }
+
+        #expanded-content > div {
+            display: block;
+        }
     </style>
-  </head>
-  <body>
-    <div style="
-      background-color:#f1f1f1;
-      text-align:center;
-      padding:40px
-      
-      ">
-      <img src='https://ts1.cn.mm.bing.net/th/id/R-C.9f8afddd6f97f5b99087144794220f10?rik=xddtLpntPspIRA&riu=http%3a%2f%2fn.sinaimg.cn%2ffront%2f785%2fw500h285%2f20190224%2fXd70-htknpmi2641087.jpg&ehk=0YRV2tic%2bmUGALzE7qrlk6rHRXJhjF7Hcu5odG0Nras%3d&risl=&pid=ImgRaw&r=0' alt="Neil" width="200ps" height="120ps">
-      <p>Pkm导航 v.1.0</p>
-    </div> 
+</head>
+<body>
 
-    <div style="
-      max-width:700px;
-      margin: 30px auto;
-      padding:15px;
-      line-height:1.7;
-      ">
-
-        <p>  <a href="https://calc.pokemonshowdown.com/">伤害计算器，采用G9</a> </p> 
-        <p>  <a href="https://pokemondb.net/pokedex/national/">全国图鉴</a> </p>
-        <p>  <a href="https://www.youtube.com/@pokemon/streams">油管直播</a> </p>
-        <p>  <a href="https://pokemonshowdown.com/"> showdown（线上对战模拟器）</a> </p>
-      
-      
+<div id="header">
+    <div id="logo">
+        <img src='https://ts1.cn.mm.bing.net/th/id/R-C.9f8afddd6f97f5b99087144794220f10?rik=xddtLpntPspIRA&riu=http%3a%2f%2fn.sinaimg.cn%2ffront%2f785%2fw500h285%2f20190224%2fXd70-htknpmi2641087.jpg&ehk=0YRV2tic%2bmUGALzE7qrlk6rHRXJhjF7Hcu5odG0Nras%3d&risl=&pid=ImgRaw&r=0'  width="50px" height="40px">
     </div>
-   <div style="
-      background-color:#f1f1f1;
-      text-align:center;
-      padding:40px;
-      font-size:12px">
-      <p>forestelf的网站</p>
-      <a href="https://pokemmo.eu/">友情链接</a>
+    <div id="navigation">
+        <div class="expandable" onclick="showContent('content1')">什么是宝可梦？</div>
+        <div class="expandable" onclick="showContent('content2')">什么功能？</div>
+        <div class="expandable" onclick="showContent('content3')">会有什么？</div>
+        <div class="expandable" onclick="showContent('content4')">pkm类功能导航</div>
+    </div>
+</div>
 
-       </div> 
+<div id="box">
+    <div>
+        <!-- 放置图片和标题的内容 -->
+    </div>
+    <div>
+        <div style="text-align: center">
+            <p>  <a href="https://calc.pokemonshowdown.com/">伤害计算器，采用G9</a> </p> </div>
+        <div style="text-align: center">
+            <p>  <a href="https://pokemondb.net/pokedex/national/">全国图鉴</a> </p></div>
+        <div style="text-align: center">
+            <p>  <a href="https://www.youtube.com/@pokemon/streams">油管直播</a> </p></div>
+        <div style="text-align: center">
+            <p>  <a href="https://pokemonshowdown.com/"> showdown对战模拟器</a> </p></div>
+    </div>
+</div>
 
-  </body>
+<div id="content">
+    <p>forestelf的网站</p>
+    <a href="https://pokemmo.eu/">友情链接</a>
+</div>
+
+<div id="expanded-content">
+    <div id="content1">
+        <h2>什么是宝可梦？</h2>
+        <p>宝可梦（日文︰ポケットモンスター、ポケモン，英文︰Pocket Monsters、Pokémon），日本角色扮演游戏《宝可梦》系列及其衍生作品中的物种，它们是一种生活在宝可梦世界里既神秘又不可思议的生物，关于它们的生态仍然存在着许多人类未能破解的谜团。
+            有些宝可梦和人类友好地居住在一起，成为朋友和伙伴，有些野生宝可梦则栖息于草丛、洞窟或是大海里，训练家可以用精灵球捕捉宝可梦。宝可梦从蛋中出生，许多宝可梦可以进化成另一种宝可梦，从而体型变大或者能力变强。宝可梦具有性别划分，可分为三种：雄性、雌性、无性别/不明。
+            宝可梦可以学会各种招式，使用招式可以对战或进行各种活动。截至第九世代，已知的宝可梦一共有1020种。依据其特征，可分为18种属性。也有同时拥有2种属性的宝可梦。属性之间相互克制，很大程度上影响着对战。灵活运用属性相性会使训练家在对战中占有优势。</p>
+    </div>
+    <div id="content2">
+        <h2>什么功能？</h2>
+        <p>给你导到神秘小网站上面去（宝可梦/幻兽帕鲁etc.）</p>
+    </div>
+    <div id="content3">
+        <h2>会有什么？</h2>
+        <p>图鉴，计算器，比赛等等</p>
+    </div>
+    <div id="content4">
+        <h2>pkm类功能导航</h2>
+        <p>如要联系编者，邮件发送3495862250@qq.com</p>
+    </div>
+</div>
+
+<script>
+    function showContent(contentId) {
+        var expandedContent = document.getElementById('expanded-content');
+        // 切换显示状态
+        expandedContent.style.display = (expandedContent.style.display === 'block') ? 'none' : 'block';
+    }
+</script>
+
+</body>
 </html>
